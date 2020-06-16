@@ -1,20 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using WeatherForecast.Core.Enums;
+using WeatherForecast.Core.UseCases.WeatherForecasts.Interfaces;
 
 namespace WeatherForecast.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("location/{locationId}/weather")]
     public class WeatherForecastController : ControllerBase
     {
-        [HttpGet]
-        public string Get()
+        private readonly IGetWeatherByLocationIdUseCase getWeatherByLocationUseCase;
+
+        public WeatherForecastController(IGetWeatherByLocationIdUseCase getWeatherByLocationUseCase)
         {
-            return "Hello world!";
+            this.getWeatherByLocationUseCase = getWeatherByLocationUseCase;
+        }
+
+        [HttpGet]
+        public IActionResult Get(int locationId, ThermometricScales scale)
+        {
+            var result = getWeatherByLocationUseCase.Execute(locationId, scale);
+            
+            if(result == null || !result.Any())
+            {
+                return NoContent();
+            }
+
+            return Ok(result);
         }
     }
 }
