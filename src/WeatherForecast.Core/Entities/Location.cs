@@ -26,7 +26,7 @@ namespace WeatherForecast.Core.Entities
 
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public float Latitude { get; private set; }
-        public float Longitude { get; private set; }
+        public float? Latitude { get; private set; }
+        public float? Longitude { get; private set; }
     }
 }

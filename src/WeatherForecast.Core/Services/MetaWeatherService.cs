@@ -13,14 +13,14 @@ namespace WeatherForecast.Core.Services
     {
         private readonly HttpClient client;
 
-        public MetaWeatherService(HttpClient client)
+        public MetaWeatherService(IHttpClientFactory client)
         {
-            this.client = client;
+            this.client = client.CreateClient("MetaWeatherApiUrl");
         }
 
         public async Task<IEnumerable<LocationResumeDto>> SearchLocation(string location)
         {
-            var response = await client.GetAsync($"api/location/search/?query={location}");
+            var response = await client.GetAsync($"api/location/search?query={location}");
 
             if(response.IsSuccessStatusCode)
             {

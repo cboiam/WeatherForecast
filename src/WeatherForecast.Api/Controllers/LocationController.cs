@@ -17,9 +17,9 @@ namespace WeatherForecast.Api.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Search([FromQuery]string location)
+        public async Task<IActionResult> Search([FromQuery]string term)
         {
-            var result = await searchLocationUseCase.Execute(location);
+            var result = await searchLocationUseCase.Execute(term);
 
             if (result == null || !result.Any())
             {
