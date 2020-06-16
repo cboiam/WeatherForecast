@@ -17,10 +17,10 @@ namespace WeatherForecast.Core.Entities
 
         public DateTime Date { get; private set; }
 
-        private Temperature minTemperature;
+        private readonly Temperature minTemperature;
         public double MinTemperature => minTemperature.Evaluate(Scale);
 
-        private Temperature maxTemperature;
+        private readonly Temperature maxTemperature;
         public double MaxTemperature => maxTemperature.Evaluate(Scale);
     }
 }
