@@ -6,7 +6,7 @@ using WeatherForecast.Core.UseCases.Locations.Interfaces;
 namespace WeatherForecast.Api.Controllers
 {
     [ApiController]
-    [Route("location")]
+    [Route("locations")]
     public class LocationController : ControllerBase
     {
         private readonly ISearchLocationUseCase searchLocationUseCase;
