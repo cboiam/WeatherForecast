@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "9c9cac1e-8c20-4974-9106-66358b1c78ad",
+		"name": "WeatherForecast",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44391/locations/search?term=london",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44391",
+					"path": [
+						"locations",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "london"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get weather",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44391/locations/44418/weather",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44391",
+					"path": [
+						"locations",
+						"44418",
+						"weather"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get weather in fahrenheit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44391/locations/44418/weather?scale=Fahrenheit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44391",
+					"path": [
+						"locations",
+						"44418",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "scale",
+							"value": "Fahrenheit"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get weather in kelvin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44391/locations/44418/weather?scale=Kelvin",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44391",
+					"path": [
+						"locations",
+						"44418",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "scale",
+							"value": "Kelvin"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
