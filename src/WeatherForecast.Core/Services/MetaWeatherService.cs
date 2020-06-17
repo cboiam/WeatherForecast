@@ -31,9 +31,17 @@ namespace WeatherForecast.Core.Services
             throw new ApplicationException("Third party service not available or running with errors, contact administrators for more feedback!");
         }
 
-        public Task<WeatherDto> GetWeatherForecast(int locationId)
+        public async Task<LocationWeatherDto> GetWeatherForecast(int locationId)
         {
-            throw new NotImplementedException();
+            var response = await client.GetAsync($"api/location/{locationId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<LocationWeatherDto>(content, JsonSerializerSettings);
+            }
+
+            throw new ApplicationException("Third party service not available or running with errors, contact administrators for more feedback!");
         }
 
         private JsonSerializerSettings JsonSerializerSettings => new JsonSerializerSettings

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using System.Threading.Tasks;
 using WeatherForecast.Core.Enums;
 using WeatherForecast.Core.UseCases.WeatherForecasts.Interfaces;
 
 namespace WeatherForecast.Api.Controllers
 {
     [ApiController]
-    [Route("location/{locationId}/weather")]
+    [Route("locations/{locationId}/weather")]
     public class WeatherForecastController : ControllerBase
     {
         private readonly IGetWeatherByLocationIdUseCase getWeatherByLocationUseCase;
@@ -17,9 +17,9 @@ namespace WeatherForecast.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(int locationId, ThermometricScales scale)
+        public async Task<IActionResult> Get(int locationId, [FromQuery]ThermometricScales scale)
         {
-            var result = getWeatherByLocationUseCase.Execute(locationId, scale);
+            var result = await getWeatherByLocationUseCase.Execute(locationId, scale);
             return Ok(result);
         }
     }

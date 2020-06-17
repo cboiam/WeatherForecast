@@ -8,6 +8,6 @@ namespace WeatherForecast.Core.Services.Interfaces
     {
         Task<IEnumerable<LocationResumeDto>> SearchLocation(string location);
 
-        Task<WeatherDto> GetWeatherForecast(int locationId);
+        Task<LocationWeatherDto> GetWeatherForecast(int locationId);
     }
 }
