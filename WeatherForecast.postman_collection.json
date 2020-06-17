@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44391/locations/search?term=london",
+					"raw": "https://localhost:5001/locations/search?term=london",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44391",
+					"port": "5001",
 					"path": [
 						"locations",
 						"search"
@@ -37,12 +37,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44391/locations/44418/weather",
+					"raw": "https://localhost:5001/locations/44418/weather",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44391",
+					"port": "5001",
 					"path": [
 						"locations",
 						"44418",
@@ -58,12 +58,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44391/locations/44418/weather?scale=Fahrenheit",
+					"raw": "https://localhost:5001/locations/44418/weather?scale=Fahrenheit",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44391",
+					"port": "5001",
 					"path": [
 						"locations",
 						"44418",
@@ -85,12 +85,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44391/locations/44418/weather?scale=Kelvin",
+					"raw": "https://localhost:5001/locations/44418/weather?scale=Kelvin",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44391",
+					"port": "5001",
 					"path": [
 						"locations",
 						"44418",
