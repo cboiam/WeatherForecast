@@ -11,6 +11,14 @@ The tests are distributed in three layers of the bottom of the original test pyr
 
 ![3 layers test pyramid](images/image9-1.png)
 
+## Usage
+
+There are two branches in this repository for training, the main objective of both are to get to the maximum code coverage and mutant killed you can get.
+
+The `Broken` branch have some tests already implemented, with tests passing, breaking and missing. Use this to also improve your debugging skills.
+
+The `Missing` branch doesn't have any tests implemented, use your creativity and write them in your own code style and techniques.
+
 ## Running the application
 
 Run command inside the api project folder:
