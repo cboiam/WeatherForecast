@@ -5,7 +5,7 @@ namespace WeatherForecast.Core.Entities
 {
     public class Forecast
     {
-        public Forecast(ThermometricScales scale, DateTime date, int minTemperature, int maxTemperature)
+        public Forecast(ThermometricScales scale, DateTime date, float minTemperature, float maxTemperature)
         {
             Scale = scale;
             Date = date;

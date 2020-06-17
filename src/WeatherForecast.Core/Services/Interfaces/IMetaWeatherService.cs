@@ -6,6 +6,8 @@ namespace WeatherForecast.Core.Services.Interfaces
 {
     public interface IMetaWeatherService
     {
-        public Task<IEnumerable<LocationResumeDto>> SearchLocation(string location);
+        Task<IEnumerable<LocationResumeDto>> SearchLocation(string location);
+
+        Task<WeatherDto> GetWeatherForecast(int locationId);
     }
 }

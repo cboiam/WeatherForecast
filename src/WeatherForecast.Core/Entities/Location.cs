@@ -10,9 +10,11 @@ namespace WeatherForecast.Core.Entities
             Name = name;
         }
 
-        public Location(int id, string name, string geolocalization)
+        public Location(int id, string name, string geolocalization, string type)
             : this(id, name)
         {
+            Type = type;
+
             var latitudeAndLongitude = geolocalization.Split(',');
 
             if(latitudeAndLongitude.Length != 2)
@@ -28,5 +30,6 @@ namespace WeatherForecast.Core.Entities
         public string Name { get; private set; }
         public float? Latitude { get; private set; }
         public float? Longitude { get; private set; }
+        public string Type { get; set; }
     }
 }

@@ -31,6 +31,11 @@ namespace WeatherForecast.Core.Services
             throw new ApplicationException("Third party service not available or running with errors, contact administrators for more feedback!");
         }
 
+        public Task<WeatherDto> GetWeatherForecast(int locationId)
+        {
+            throw new NotImplementedException();
+        }
+
         private JsonSerializerSettings JsonSerializerSettings => new JsonSerializerSettings
         {
             ContractResolver = new DefaultContractResolver

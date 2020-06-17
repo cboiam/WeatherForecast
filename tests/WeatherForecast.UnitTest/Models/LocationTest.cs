@@ -10,7 +10,7 @@ namespace WeatherForecast.UnitTest.Models
         [Fact]
         public void ConstructLocation_ShouldSucceed_WhenWellFormattedGeolocalization()
         {
-            var location = new Location(1, "Location", "51.506321,-0.12714");
+            var location = new Location(1, "Location", "51.506321,-0.12714", "city");
 
             location.Latitude.Should().Be(51.506321f);
             location.Longitude.Should().Be(-0.12714f);
@@ -25,7 +25,7 @@ namespace WeatherForecast.UnitTest.Models
         [Fact]
         public void ConstructLocation_ShouldThrowException_WhenLiteralsInGeolocation()
         {
-            new Location(1, "Location", "51.506321,-0.12ab714");
+            new Location(1, "Location", "51.506321,-0.12ab714", "city");
         }
     }
 }

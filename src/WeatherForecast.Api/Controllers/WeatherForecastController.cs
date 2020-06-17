@@ -20,12 +20,6 @@ namespace WeatherForecast.Api.Controllers
         public IActionResult Get(int locationId, ThermometricScales scale)
         {
             var result = getWeatherByLocationUseCase.Execute(locationId, scale);
-            
-            if(result == null || !result.Any())
-            {
-                return NoContent();
-            }
-
             return Ok(result);
         }
     }

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using WeatherForecast.Core.Enums;
+﻿using WeatherForecast.Core.Enums;
 using WeatherForecast.Core.Entities;
+using System.Threading.Tasks;
 
 namespace WeatherForecast.Core.UseCases.WeatherForecasts.Interfaces
 {
     public interface IGetWeatherByLocationIdUseCase
     {
-        IEnumerable<Weather> Execute(int locationId, ThermometricScales scale);
+        Task<Weather> Execute(int locationId, ThermometricScales scale);
     }
 }
