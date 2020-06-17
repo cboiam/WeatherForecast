@@ -1,0 +1,9 @@
+{
+  "stryker-config": {
+    "test-runner": "vstest",
+    "reporters": ["progress", "html"],
+    "log-level": "info",
+    "timeout-ms": 10000,
+    "max-concurrent-test-runners": 2
+  }
+}
