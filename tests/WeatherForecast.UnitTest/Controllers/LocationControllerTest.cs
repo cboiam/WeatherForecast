@@ -39,9 +39,22 @@ namespace WeatherForecast.UnitTest.Controllers
         }
 
         [Fact]
-        public async Task Search_ShouldReturnNoContent_WhenNoLocationsWereFound()
+        public async Task Search_ShouldReturnNoContent_WhenNoLocationsResultIsNull()
         {
             var controller = new LocationController(new Mock<ISearchLocationUseCase>().Object);
+            var result = await controller.Search("location");
+
+            result.Should().BeOfType<NoContentResult>();
+        }
+
+        [Fact]
+        public async Task Search_ShouldReturnNoContent_WhenNoLocationsWereFound()
+        {
+            var useCase = new Mock<ISearchLocationUseCase>();
+            useCase.Setup(x => x.Execute("location"))
+                .ReturnsAsync(new List<Location>());
+
+            var controller = new LocationController(useCase.Object);
             var result = await controller.Search("location");
 
             result.Should().BeOfType<NoContentResult>();
