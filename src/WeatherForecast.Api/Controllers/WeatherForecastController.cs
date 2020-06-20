@@ -18,16 +18,16 @@ namespace WeatherForecast.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetWeatherForecast(int locationId, [FromQuery]ThermometricScales scale)
+        public async Task<IActionResult> GetWeatherForecast(int locationId, [FromQuery] ThermometricScales scale)
         {
             var result = await getWeatherByLocationUseCase.Execute(locationId, scale);
 
-            if(result == null)
+            if (result == null)
             {
                 return NotFound();
             }
 
-            if(result.Forecasts == null || !result.Forecasts.Any())
+            if (result.Forecasts == null || !result.Forecasts.Any())
             {
                 return NoContent();
             }

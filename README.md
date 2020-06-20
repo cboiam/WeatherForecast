@@ -24,7 +24,7 @@ The `Missing` branch doesn't have any tests implemented, use your creativity and
 Run command inside the api project folder:
 
 ```
-dotnet run
+$ dotnet run
 ```
 
 ## Running the tests
@@ -32,7 +32,23 @@ dotnet run
 Run command on the root folder or inside a test project folder:
 
 ```
-dotnet test
+$ dotnet test
+```
+
+## Running the code coverage analysis
+
+If you don't have reportgenerator tool installed, go to the root of the project and run:
+
+```
+$ dotnet tool restore
+```
+
+On the root folder run the following commands:
+
+```
+$ dotnet test WeatherForecast.sln /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/ /p:CollectCoverage=true
+
+$ dotnet reportgenerator "-reports:./tests/WeatherForecast.UnitTest/TestResults/coverage.opencover.xml;./tests/WeatherForecast.IntegrationTest/TestResults/coverage.opencover.xml;./tests/WeatherForecast.FunctionalTest/TestResults/coverage.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html
 ```
 
 ## Running the mutation tests
@@ -40,13 +56,13 @@ dotnet test
 If you don't have dotnet-stryker installed, go to the root of the project and run:
 
 ```
-dotnet tool restore
+$ dotnet tool restore
 ```
 
 On WeatherForecast/tests/WeatherForecast.UnitTest run:
 
 ```
-dotnet stryker --project-file=[projectfile]
+$ dotnet stryker --project-file=[projectfile]
 ```
 
 ## Built with
