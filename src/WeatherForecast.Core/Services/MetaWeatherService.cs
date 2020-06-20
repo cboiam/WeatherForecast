@@ -12,6 +12,14 @@ namespace WeatherForecast.Core.Services
     public class MetaWeatherService : IMetaWeatherService
     {
         private readonly HttpClient client;
+        private readonly ApplicationException serviceNotAvailableException = new ApplicationException("Third party service not available or running with errors, contact administrators for more feedback!");
+        private readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
+        {
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new SnakeCaseNamingStrategy()
+            }
+        };
 
         public MetaWeatherService(IHttpClientFactory client)
         {
@@ -22,34 +30,26 @@ namespace WeatherForecast.Core.Services
         {
             var response = await client.GetAsync($"api/location/search?query={location}");
 
-            if(response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<IEnumerable<LocationResumeDto>>(content, JsonSerializerSettings);
+                throw serviceNotAvailableException;
             }
 
-            throw new ApplicationException("Third party service not available or running with errors, contact administrators for more feedback!");
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<IEnumerable<LocationResumeDto>>(content, jsonSerializerSettings);
         }
 
         public async Task<LocationWeatherDto> GetWeatherForecast(int locationId)
         {
             var response = await client.GetAsync($"api/location/{locationId}");
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<LocationWeatherDto>(content, JsonSerializerSettings);
+                throw serviceNotAvailableException;
             }
 
-            throw new ApplicationException("Third party service not available or running with errors, contact administrators for more feedback!");
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<LocationWeatherDto>(content, jsonSerializerSettings);
         }
-
-        private JsonSerializerSettings JsonSerializerSettings => new JsonSerializerSettings
-        {
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new SnakeCaseNamingStrategy()
-            }
-        };
     }
 }
