@@ -79,7 +79,7 @@ $ dotnet stryker --project-file=[projectfile]
 ![Test pyramid result with 2 functional tests, 5 integration tests and 23 unit tests](images/TestPyramidResult.PNG)
 
 ##### Coverage
-![Coverage result with 100% coverage on core project and 93% coverage on api project](images/CoverageReport.PNG)
+![Coverage result with 100% coverage on core project and 93% coverage on api project](images/CoverageReport.png)
 
 ##### Mutation report of the controllers
 ![Mutation report with 100% killed mutations on controllers](images/MutationReportOnUnitTestPointingToApi.PNG)
