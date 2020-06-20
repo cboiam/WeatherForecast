@@ -40,7 +40,6 @@ namespace WeatherForecast.IntegrationTest.Services
         [Fact]
         public async Task SearchLocation_ShouldReturnLocations_WhenSuccessStatusCode()
         {
-            // Arrange
             server.Given(Request.Create()
                             .UsingGet()
                             .WithPath("/api/location/search")
@@ -56,10 +55,8 @@ namespace WeatherForecast.IntegrationTest.Services
                                         ]")
                             .WithSuccess());
 
-            // Act
             var locations = await service.SearchLocation("location");
             
-            // Assert
             locations.Should().BeEquivalentTo(new List<LocationResumeDto>
             {
                 new LocationResumeDto { Woeid = 1, Title = "location" }
@@ -69,18 +66,87 @@ namespace WeatherForecast.IntegrationTest.Services
         [Fact]
         public void SearchLocation_ShouldThrowApplicationException_WhenErrorStatusCode()
         {
-            // Arrange
             server.Given(Request.Create()
-                            .UsingGet()
-                            .WithPath("/api/location/search")
-                            .WithParam("query", new ExactMatcher("error")))
-                   .RespondWith(Response.Create()
-                            .WithStatusCode(StatusCodes.Status500InternalServerError));
+                    .UsingGet()
+                    .WithPath("/api/location/search")
+                    .WithParam("query", new ExactMatcher("error")))
+                .RespondWith(Response.Create()
+                    .WithStatusCode(StatusCodes.Status500InternalServerError));
 
-            // Act
             Action action = () => service.SearchLocation("error").Wait();
             
-            // Assert
+            action.Should().Throw<ApplicationException>()
+                .WithMessage("Third party service not available or running with errors, contact administrators for more feedback!");
+        }
+
+        [Fact]
+        public async Task GetWeatherForecast_ReturnsLocationWeather_WhenSuccess()
+        {
+            server.Given(Request.Create()
+                    .UsingGet()
+                    .WithPath("/api/location/1"))
+                .RespondWith(Response.Create()
+                    .WithBody(@"{
+                                    ""woeid"": 1,
+                                    ""title"": ""Location"",
+                                    ""latt_long"": ""1,2"",
+                                    ""location_type"": ""City"",
+                                    ""consolidated_weather"": [
+                                        {
+                                            ""min_temp"": 1,
+                                            ""max_temp"": 2,
+                                            ""applicable_date"": ""2020-06-20""
+                                        },
+                                        {
+                                            ""min_temp"": 3,
+                                            ""max_temp"": 4,
+                                            ""applicable_date"": ""2020-06-21""
+                                        }
+                                    ]
+                                }")
+                    .WithSuccess());
+
+            var result = await service.GetWeatherForecast(1);
+
+            result.Should().BeEquivalentTo(new LocationWeatherDto
+            {
+                Woeid = 1,
+                Title = "Location",
+                LattLong = "1,2",
+                LocationType = "City",
+                ConsolidatedWeather = new List<ForecastDto>
+                { 
+                    new ForecastDto { MinTemp = 1, MaxTemp = 2, ApplicableDate = new DateTime(2020, 06, 20) },
+                    new ForecastDto { MinTemp = 3, MaxTemp = 4, ApplicableDate = new DateTime(2020, 06, 21) }
+                }
+            });
+        }
+
+        [Fact]
+        public async Task GetWeatherForecast_ReturnsNull_WhenNoLocationDoesntExist()
+        {
+            server.Given(Request.Create()
+                    .UsingGet()
+                    .WithPath("/api/location/2"))
+                .RespondWith(Response.Create()
+                    .WithStatusCode(StatusCodes.Status404NotFound));
+
+            var result = await service.GetWeatherForecast(2);
+
+            result.Should().BeNull();
+        }
+
+        [Fact]
+        public void GetWeatherForecast_ThrowsApplicationException_WhenServiceRespondWithError()
+        {
+            server.Given(Request.Create()
+                    .UsingGet()
+                    .WithPath("/api/location/3"))
+                .RespondWith(Response.Create()
+                    .WithStatusCode(StatusCodes.Status500InternalServerError));
+
+            Action action = () => service.GetWeatherForecast(3).Wait();
+
             action.Should().Throw<ApplicationException>()
                 .WithMessage("Third party service not available or running with errors, contact administrators for more feedback!");
         }
