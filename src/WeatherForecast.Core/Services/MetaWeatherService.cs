@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WeatherForecast.Core.Dtos;
@@ -30,10 +31,7 @@ namespace WeatherForecast.Core.Services
         {
             var response = await client.GetAsync($"api/location/search?query={location}");
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw serviceNotAvailableException;
-            }
+            ValidateErrorStatus(response);
 
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<LocationResumeDto>>(content, jsonSerializerSettings);
@@ -43,13 +41,23 @@ namespace WeatherForecast.Core.Services
         {
             var response = await client.GetAsync($"api/location/{locationId}");
 
+            if (response.StatusCode.Equals(HttpStatusCode.NotFound))
+            {
+                return null;
+            }
+
+            ValidateErrorStatus(response);
+
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<LocationWeatherDto>(content, jsonSerializerSettings);
+        }
+
+        private void ValidateErrorStatus(HttpResponseMessage response)
+        {
             if (!response.IsSuccessStatusCode)
             {
                 throw serviceNotAvailableException;
             }
-
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<LocationWeatherDto>(content, jsonSerializerSettings);
         }
     }
 }
