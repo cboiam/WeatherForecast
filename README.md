@@ -9,7 +9,7 @@ The tests are distributed in three layers of the bottom of the original test pyr
 - [Test pyramid](https://martinfowler.com/bliki/TestPyramid.html)
 - [Test pyramid applied to .Net](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/test-asp-net-core-mvc-apps)
 
-![3 layers test pyramid](images/image9-1.png)
+![3 layers test pyramid with Functional tests at the top, followed by integration tests and unit tests on bottom](images/TestPyramid.png)
 
 ## Usage
 
@@ -72,3 +72,20 @@ $ dotnet stryker --project-file=[projectfile]
 - [Fluent Assertions](https://fluentassertions.com/) - _Unit Test Assertions Extension Methods_
 - [Moq](https://github.com/moq/moq4) - _The most popular mocking library for .NET_
 - [WireMock](https://github.com/WireMock-Net/WireMock.Net) - _A flexible library for stubbing and mocking web HTTP responses_
+
+## My results
+
+##### Test pyramid
+![Test pyramid result with 2 functional tests, 5 integration tests and 23 unit tests](images/TestPyramidResult.PNG)
+
+##### Coverage
+![Coverage result with 100% coverage on core project and 93% coverage on api project](images/CoverageReport.PNG)
+
+##### Mutation report of the controllers
+![Mutation report with 100% killed mutations on controllers](images/MutationReportOnUnitTestPointingToApi.PNG)
+
+##### Mutation report of the core logic
+![Mutation report with 100% killed mutations on core logic](images/MutationReportOnUnitTestPointingToCore.PNG)
+
+##### Mutation report of the services
+![Mutation report with 100% killed mutations on services](images/MutationReportOnIntegrationTestPointingToCore.PNG)

@@ -8,7 +8,7 @@
     "files-to-exclude": [
       "**/src/WeatherForecast.Api/Program.cs",
       "**/src/WeatherForecast.Api/Startup.cs",
-      "**/src/WeatherForecast.Api/Configuration/",
+      "**/src/WeatherForecast.Api/Configurations/",
       "**/src/WeatherForecast.Core/Services/"
     ]
   }

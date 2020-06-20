@@ -7,7 +7,7 @@
     "max-concurrent-test-runners": 2,
     "files-to-exclude": [
       "**/src/WeatherForecast.Core/Entities/",
-      "**/src/WeatherForecast.Core/UseCases/"
+      "**/src/WeatherForecast.Core/UseCases/**"
     ]
   }
 }
