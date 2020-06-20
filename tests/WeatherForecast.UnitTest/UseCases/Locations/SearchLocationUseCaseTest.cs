@@ -41,6 +41,7 @@ namespace WeatherForecast.UnitTest.UseCases.Locations
         [Theory]
         [InlineData(null)]
         [InlineData("")]
+        [InlineData(" ")]
         public void Execute_ShouldThrowBusinessException_WhenEmptyLocation(string location)
         {
             //Arrange
@@ -48,7 +49,7 @@ namespace WeatherForecast.UnitTest.UseCases.Locations
 
             // Act
             var useCase = new SearchLocationUseCase(weatherService.Object, Mapper.Instance);
-            Action action = async () => await useCase.Execute(location);
+            Action action = () => useCase.Execute(location).Wait();
 
             // Assert
             action.Should().Throw<BusinessException>()

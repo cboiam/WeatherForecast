@@ -37,5 +37,14 @@ namespace WeatherForecast.UnitTest.Controllers
             objectResultAssertion.Which.StatusCode.Should().Be(StatusCodes.Status200OK);
             objectResultAssertion.Which.Value.Should().BeEquivalentTo(locations);
         }
+
+        [Fact]
+        public async Task Search_ShouldReturnNoContent_WhenNoLocationsWereFound()
+        {
+            var controller = new LocationController(new Mock<ISearchLocationUseCase>().Object);
+            var result = await controller.Search("location");
+
+            result.Should().BeOfType<NoContentResult>();
+        }
     }
 }

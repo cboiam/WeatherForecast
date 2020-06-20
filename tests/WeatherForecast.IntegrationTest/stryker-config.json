@@ -6,10 +6,8 @@
     "timeout-ms": 10000,
     "max-concurrent-test-runners": 2,
     "files-to-exclude": [
-      "**/src/WeatherForecast.Api/Program.cs",
-      "**/src/WeatherForecast.Api/Startup.cs",
-      "**/src/WeatherForecast.Api/Configuration/",
-      "**/src/WeatherForecast.Core/Services/"
+      "**/src/WeatherForecast.Core/Entities/",
+      "**/src/WeatherForecast.Core/UseCases/"
     ]
   }
 }

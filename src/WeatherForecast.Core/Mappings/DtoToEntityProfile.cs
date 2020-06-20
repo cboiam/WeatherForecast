@@ -25,7 +25,10 @@ namespace WeatherForecast.Core.Mappings
                     src.Item1.ApplicableDate, 
                     src.Item1.MinTemp,
                     src.Item1.MaxTemp));
-            
+
+            CreateMap<LocationWeatherDto, Location>()
+                .ConstructUsing(src => new Location(src.Woeid, src.Title, src.LattLong, src.LocationType));
+
             CreateMap<LocationResumeDto, Location>()
                 .ConstructUsing(src => new Location(src.Woeid, src.Title));
         }

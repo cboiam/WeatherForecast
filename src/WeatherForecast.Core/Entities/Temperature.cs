@@ -5,19 +5,21 @@ namespace WeatherForecast.Core.Entities
 {
     public class Temperature
     {
+        /// <param name="temperature">Temperature in Celcius</param>
         public Temperature(double temperature)
         {
             TemperatureC = temperature;
         }
 
-        public double TemperatureC { get; private set; }
+        private double TemperatureC { get; }
 
-        public double TemperatureF => 32 + (TemperatureC / 0.56);
+        private double TemperatureF => 32 + (TemperatureC / 0.5556);
 
-        public double TemperatureK => 237 + TemperatureC;
+        private double TemperatureK => 273 + TemperatureC;
 
         public double Evaluate(ThermometricScales scale) => scale switch
         {
+            ThermometricScales.Celsius => TemperatureC,
             ThermometricScales.Fahrenheit => TemperatureF,
             ThermometricScales.Kelvin => TemperatureK,
             _ => throw new NotImplementedException("This scale doesn't exist!")

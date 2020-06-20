@@ -18,7 +18,8 @@ namespace WeatherForecast.Api.Configurations
 
         public static IServiceCollection RegisterUseCases(this IServiceCollection services)
         {
-            return services.AddScoped<ISearchLocationUseCase, SearchLocationUseCase>();
+            return services.AddScoped<ISearchLocationUseCase, SearchLocationUseCase>()
+                .AddScoped<IGetWeatherByLocationIdUseCase, GetWeatherByLocationIdUseCase>();
         }
 
         public static IServiceCollection RegisterServices(this IServiceCollection services)
