@@ -12,5 +12,4 @@
     <ProjectReference Include="..\WeatherForecast.Core\WeatherForecast.Core.csproj" />
   </ItemGroup>
 
-
 </Project>
