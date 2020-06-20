@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using WeatherForecast.Api;
 using WireMock.Server;
 using Xunit;
@@ -13,8 +13,13 @@ namespace WeatherForecast.FunctionalTest.Controllers
     public class ControllerBaseTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         protected readonly HttpClient client;
-        protected readonly JsonSerializerSettings jsonSerializerSettings;
+        protected readonly JsonSerializerOptions jsonSerializerOptions;
         protected static FluentMockServer server;
+
+        static ControllerBaseTest()
+        {
+            server = FluentMockServer.Start("http://localhost:7080");
+        }
 
         public ControllerBaseTest(WebApplicationFactory<Startup> factory)
         {
@@ -28,16 +33,12 @@ namespace WeatherForecast.FunctionalTest.Controllers
                 x.UseConfiguration(configuration);
             }).CreateClient();
 
-            jsonSerializerSettings = new JsonSerializerSettings
+            jsonSerializerOptions = new JsonSerializerOptions
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                NullValueHandling = NullValueHandling.Ignore
+                IgnoreNullValues = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-
-            if (server == null)
-            {
-                server = FluentMockServer.Start("http://localhost:7080");
-            }
+            jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         }
     }
 }

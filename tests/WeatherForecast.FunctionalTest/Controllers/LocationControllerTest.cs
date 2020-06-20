@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using WeatherForecast.Api;
 using WeatherForecast.Core.Entities;
@@ -21,7 +21,6 @@ namespace WeatherForecast.FunctionalTest.Controllers
         [Fact]
         public async Task SearchLocation_ShouldReturn200WithLocations_WhenLocationsFound()
         {
-            // Arrange
             server.Given(Request.Create()
                             .UsingGet()
                             .WithPath("/api/location/search")
@@ -37,17 +36,15 @@ namespace WeatherForecast.FunctionalTest.Controllers
                                         ]")
                             .WithSuccess());
 
-            // Act
             var result = await client.GetAsync("/locations/search?term=location");
-
-            // Assert
+            
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
 
             var content = await result.Content.ReadAsStringAsync();
-            var expectedContent = JsonConvert.SerializeObject(new List<Location>
+            var expectedContent = JsonSerializer.Serialize(new List<Location>
             {
                 new Location(1, "location")
-            }, jsonSerializerSettings);
+            }, jsonSerializerOptions);
 
             content.Should().Be(expectedContent);
         }

@@ -16,7 +16,6 @@ namespace WeatherForecast.UnitTest.Controllers
         [Fact]
         public async Task Search_ShouldReturnLocations_WhenLocationsFound()
         {
-            // Arrange
             var locations = new List<Location>
             {
                 new Location(1, "loc"),
@@ -27,11 +26,9 @@ namespace WeatherForecast.UnitTest.Controllers
             useCase.Setup(x => x.Execute("location"))
                 .ReturnsAsync(locations);
 
-            // Act
             var controller = new LocationController(useCase.Object);
             var result = await controller.Search("location");
 
-            // Assert
             var objectResultAssertion = result.Should().BeOfType<OkObjectResult>();
 
             objectResultAssertion.Which.StatusCode.Should().Be(StatusCodes.Status200OK);
