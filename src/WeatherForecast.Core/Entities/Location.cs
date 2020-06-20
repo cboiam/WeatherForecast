@@ -10,16 +10,16 @@ namespace WeatherForecast.Core.Entities
             Name = name;
         }
 
-        public Location(int id, string name, string geolocalization, string type)
+        public Location(int id, string name, string geolocation, string type)
             : this(id, name)
         {
             Type = type;
 
-            var latitudeAndLongitude = geolocalization.Split(',');
+            var latitudeAndLongitude = geolocation.Split(',');
 
             if(latitudeAndLongitude.Length != 2)
             {
-                throw new FormatException("Geolocalization should have the format: '[latitude],[longitude]'");
+                throw new FormatException("Geolocation should have the format: '[latitude],[longitude]'");
             }
 
             Latitude = float.Parse(latitudeAndLongitude[0]);
