@@ -9,7 +9,7 @@ The tests are distributed in three layers of the bottom of the original test pyr
 - [Test pyramid](https://martinfowler.com/bliki/TestPyramid.html)
 - [Test pyramid applied to .Net](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/test-asp-net-core-mvc-apps)
 
-![3 layers test pyramid with Functional tests at the top, followed by integration tests and unit tests on bottom](images/TestPyramid.png)
+![3 layers test pyramid with Functional tests at the top, followed by integration tests and unit tests on bottom](https://github.com/cboiam/WeatherForecast/blob/master/images/TestPyramid.png)
 
 ## Usage
 
@@ -76,16 +76,16 @@ $ dotnet stryker --project-file=[projectfile]
 ## My results
 
 ##### Test pyramid
-![Test pyramid result with 2 functional tests, 5 integration tests and 23 unit tests](images/TestPyramidResult.PNG)
+![Test pyramid result with 2 functional tests, 5 integration tests and 23 unit tests](https://github.com/cboiam/WeatherForecast/blob/master/images/TestPyramidResult.PNG)
 
 ##### Coverage
-![Coverage result with 100% coverage on core project and 93% coverage on api project](images/CoverageReport.png)
+![Coverage result with 100% coverage on core project and 93% coverage on api project](https://github.com/cboiam/WeatherForecast/blob/master/images/CoverageReport.png)
 
 ##### Mutation report of the controllers
-![Mutation report with 100% killed mutations on controllers](images/MutationReportOnUnitTestPointingToApi.PNG)
+![Mutation report with 100% killed mutations on controllers](https://github.com/cboiam/WeatherForecast/blob/master/images/MutationReportOnUnitTestPointingToApi.PNG)
 
 ##### Mutation report of the core logic
-![Mutation report with 100% killed mutations on core logic](images/MutationReportOnUnitTestPointingToCore.PNG)
+![Mutation report with 100% killed mutations on core logic](https://github.com/cboiam/WeatherForecast/blob/master/images/MutationReportOnUnitTestPointingToCore.PNG)
 
 ##### Mutation report of the services
-![Mutation report with 100% killed mutations on services](images/MutationReportOnIntegrationTestPointingToCore.PNG)
+![Mutation report with 100% killed mutations on services](https://github.com/cboiam/WeatherForecast/blob/master/images/MutationReportOnIntegrationTestPointingToCore.PNG)
